@@ -24,16 +24,29 @@ ShiftPilot replaces the spreadsheet with an optimiser that sees the
 whole week at once, a plain-English way to add constraints, and a
 check that reports exactly what is still short instead of hiding it.
 
+**Live demo:** https://shiftpilot-ai.onrender.com — free Render tier, no
+sign-up, no API key. (The free instance sleeps after ~15 minutes idle,
+so the first visit can take up to ~60 seconds to wake up; demo data
+resets when the service restarts.)
+
 **All data in this repo is synthetic.** The 20-person roster is
 invented (fictional names, `example.edu` emails). No real Sodexo
 employee information or confidential workplace data is included.
 
 ## Screenshots
 
-Screenshots will be added here once the public demo is deployed —
-the app is verified working locally (see "Verified" below), and the
-README's image links will point at real captures from the deployed
-app, not mock-ups.
+Real captures from the live demo (week of 2026-11-30, schedule
+generated with OR-Tools CP-SAT: 105/126 slots, 83.3% coverage):
+
+| Dashboard | Weekly schedule |
+|---|---|
+| ![Dashboard](screenshots/dashboard.png) | ![Schedule](screenshots/schedule.png) |
+
+| Analytics | Natural-language assistant |
+|---|---|
+| ![Analytics](screenshots/analytics.png) | ![Assistant](screenshots/assistant.png) |
+
+## The real-world problem
 
 ## Features
 
@@ -197,6 +210,17 @@ paraphrase coverage; it never adds authority over the rota.
   Excel export all return 200.
 - Live frontend verified in a browser: Dashboard, Schedule,
   Employees, Assistant and Analytics tabs all render with real data.
+- **Deployed 2026-11-25 on Render (free tier) at
+  https://shiftpilot-ai.onrender.com** — single web service, FastAPI
+  serves the built React app. Verified live: 20 employees, schedule
+  generates 105/126 shifts (83.3% coverage), fairness 82.6/100,
+  analytics charts render. Screenshots above are real captures of
+  that deployment. Caveats: free tier sleeps after ~15 min idle
+  (first load up to ~60 s); SQLite is ephemeral, so the demo roster
+  re-seeds and the schedule resets on restart. The first auto-deploy
+  did not trigger (Render missed the push webhook); the deploy was
+  started manually from the dashboard — auto-deploy is still set to
+  "On Commit" for future pushes.
 
 ## AI-assisted development disclosure
 

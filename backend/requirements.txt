@@ -1,0 +1,15 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.36
+pydantic==2.10.4
+pydantic-settings==2.7.0
+ortools==9.11.4210
+openpyxl==3.1.5
+python-dotenv==1.0.1
+httpx==0.28.1
+# Optional LLM providers — only used when a key is set in .env.
+# Demo mode (no key) works fully with the built-in rule parser.
+openai==1.59.6
+anthropic==0.42.0
+pytest==8.3.4
+pytest-asyncio==0.24.0

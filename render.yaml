@@ -1,0 +1,24 @@
+# Render Blueprint — one-click deploy of the whole app as a single
+# free web service. The backend serves the API and the built React
+# frontend from the same origin, so no CORS or second URL is needed.
+# Free tier: the service sleeps after ~15 min idle (first load after
+# that takes ~30-60 s to wake), and the SQLite file is ephemeral —
+# the demo roster re-seeds from scratch on every restart, which is
+# the intended demo behaviour.
+services:
+  - type: web
+    name: shiftpilot-ai
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: |
+      pip install -r requirements.txt
+      cd ../frontend && npm install --no-audit --no-fund && npm run build
+      rm -rf ../backend/static && cp -r dist ../backend/static
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      # No LLM key by default: demo mode (built-in rule parser).
+      # Set OPENAI_API_KEY or ANTHROPIC_API_KEY in the Render
+      # dashboard to enable the optional LLM proposer.

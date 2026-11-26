@@ -16,6 +16,9 @@ venv/
 node_modules/
 frontend/dist/
 frontend/.vite/
+# Built frontend copied in for single-service deploys (render.yaml
+# rebuilds it; never commit the bundle).
+backend/static/
 
 # OS / editor
 .DS_Store

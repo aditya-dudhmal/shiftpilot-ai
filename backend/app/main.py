@@ -217,3 +217,18 @@ def demo_reset(db: Session = Depends(get_db)):
     db.commit()
     n = seed_employees(db)
     return {"reset": True, "employees_seeded": n}
+
+
+# --- Serve the built frontend (single-service deploy) ----------------
+# On Render the build step copies frontend/dist into backend/static.
+# API routes above take precedence (they are registered first), so
+# /api/* still hits FastAPI and everything else serves the React app.
+# Locally this directory usually does not exist, and the Vite dev
+# server serves the frontend instead — nothing changes there.
+import os as _os  # noqa: E402
+
+from fastapi.staticfiles import StaticFiles  # noqa: E402
+
+_STATIC_DIR = _os.path.join(_os.path.dirname(__file__), "..", "static")
+if _os.path.isfile(_os.path.join(_STATIC_DIR, "index.html")):
+    app.mount("/", StaticFiles(directory=_STATIC_DIR, html=True), name="frontend")

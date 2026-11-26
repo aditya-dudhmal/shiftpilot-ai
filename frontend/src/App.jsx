@@ -12,8 +12,14 @@ const EXAMPLES = [
   'Jordan needs at least 16 hours',
 ]
 
+const TABS = ['dashboard', 'schedule', 'employees', 'assistant', 'analytics']
+
 export default function App() {
-  const [tab, setTab] = useState('dashboard')
+  // Deep-linkable tabs: #schedule, #analytics, etc. open that tab directly.
+  const [tab, setTab] = useState(() => {
+    const h = window.location.hash.replace('#', '')
+    return TABS.includes(h) ? h : 'dashboard'
+  })
   const [theme, setTheme] = useState(() => localStorage.getItem('sp-theme') || 'light')
   const [employees, setEmployees] = useState([])
   const [schedule, setSchedule] = useState(null)
@@ -61,8 +67,8 @@ export default function App() {
       </header>
 
       <nav className="nav">
-        {['dashboard', 'schedule', 'employees', 'assistant', 'analytics'].map((t) => (
-          <button key={t} className={tab === t ? 'active' : ''} onClick={() => setTab(t)}>{t[0].toUpperCase() + t.slice(1)}</button>
+        {TABS.map((t) => (
+          <button key={t} className={tab === t ? 'active' : ''} onClick={() => { setTab(t); window.location.hash = t }}>{t[0].toUpperCase() + t.slice(1)}</button>
         ))}
       </nav>
 

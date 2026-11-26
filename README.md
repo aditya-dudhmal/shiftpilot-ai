@@ -30,13 +30,10 @@ employee information or confidential workplace data is included.
 
 ## Screenshots
 
-| Dashboard | Weekly schedule |
-|---|---|
-| ![Dashboard](screenshots/dashboard.png) | ![Weekly schedule](screenshots/schedule.png) |
-
-| Analytics | Natural-language assistant |
-|---|---|
-| ![Analytics](screenshots/analytics.png) | ![Assistant](screenshots/assistant.png) |
+Screenshots will be added here once the public demo is deployed —
+the app is verified working locally (see "Verified" below), and the
+README's image links will point at real captures from the deployed
+app, not mock-ups.
 
 ## Features
 
